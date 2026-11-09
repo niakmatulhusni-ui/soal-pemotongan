@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misi Pemotongan — Kuis Matematika Kelas 3</title>
+<style>
+:root{--navy:#17345f;--blue:#3d9fe8;--sky:#eaf6ff;--coral:#ff7180;--yellow:#ffd45e;--teal:#20b9b2;--ink:#24344d;--cream:#fffaf0;--green:#229b69;--red:#d94c5c}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#dff3ff,#fff7e9 55%,#e7fbf5);min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:22px}
+header{background:var(--navy);color:white;border-radius:24px;padding:22px 26px;box-shadow:0 7px 0 #102748;position:relative;overflow:hidden}
+header:after{content:"✂️";position:absolute;right:25px;top:15px;font-size:48px;transform:rotate(-15deg)}
+h1{margin:0;font-size:clamp(25px,4vw,38px)} header p{margin:8px 65px 0 0;color:#dceeff}
+.card{background:#fff;border:3px solid #b8def8;border-radius:22px;padding:22px;margin-top:18px;box-shadow:0 5px 0 rgba(45,116,170,.12)}
+.identity{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-weight:800;color:var(--navy);display:block;margin-bottom:7px}
+input:not([type=radio]),select{font:inherit;color:#24344d;-webkit-text-fill-color:#24344d;caret-color:#17345f;padding:13px 14px;border:2px solid #b7d8ef;border-radius:12px;width:100%;background:#fbfdff} input::placeholder{color:#7890a8;-webkit-text-fill-color:#7890a8;opacity:1} input[type=radio]{accent-color:#3d9fe8}
+button{font:inherit;font-weight:800;border:0;border-radius:14px;padding:13px 20px;cursor:pointer;transition:.18s transform,.18s filter}
+button:hover{filter:brightness(1.04);transform:translateY(-2px)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.primary{background:var(--blue);color:white;box-shadow:0 4px 0 #2376b8}
+.secondary{background:#e8f4ff;color:var(--navy)}
+.success{background:var(--teal);color:white}
+.hidden{display:none!important}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:#52708f;font-weight:800}
+.progress{height:13px;background:#e5eff7;border-radius:99px;overflow:hidden;margin:12px 0 18px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--teal),#8adfbd);transition:width .4s}
+.level{display:inline-block;background:#fff0c2;color:#795300;padding:7px 12px;border-radius:99px;font-size:13px;font-weight:900}
+.qtitle{font-size:22px;line-height:1.45;color:var(--navy);margin:14px 0}
+.prompt{font-size:17px;line-height:1.6;background:#f4faff;border-left:5px solid var(--blue);padding:15px;border-radius:12px}
+.answer-area{margin:18px 0}
+.option{display:flex;align-items:center;gap:12px;padding:13px 15px;border:2px solid #d5e7f5;border-radius:13px;margin:9px 0;cursor:pointer;background:white}
+.option input{width:auto;accent-color:var(--blue);transform:scale(1.2)}
+.option:has(input:checked){border-color:var(--blue);background:#eff8ff}
+.feedback{padding:14px 16px;border-radius:14px;margin:15px 0;font-weight:700;line-height:1.5;animation:pop .35s ease}
+.feedback.good{background:#e4f8ef;color:#176b4b;border:2px solid #9de0bf}
+.feedback.try{background:#fff3d5;color:#765000;border:2px solid #ffda7c}
+.feedback.bad{background:#ffe9eb;color:#923342;border:2px solid #ffb5bd}
+@keyframes pop{0%{transform:scale(.94);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.celebrate{font-size:32px;display:inline-block;animation:bounce .7s infinite}
+.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px}
+.small{font-size:13px;color:#68809a}
+.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;margin:10px 0}
+.matchrow span{font-weight:800}
+.orderboxes{display:flex;gap:8px;flex-wrap:wrap}
+.orderboxes input{max-width:90px;text-align:center}
+.final{text-align:center}
+.final h2{color:var(--navy);font-size:30px}
+.score{font-size:46px;font-weight:900;color:var(--teal)}
+footer{text-align:center;color:#70859b;font-size:12px;padding:20px}
+@media(max-width:600px){.wrap{padding:12px}.identity{grid-template-columns:1fr}.card{padding:16px}.qtitle{font-size:19px}header:after{opacity:.35}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>✂️ Misi Pemotongan</h1>
+<p>Kuis seru Matematika Kelas 3 • Pecahkan tantangan satu per satu!</p>
+</header>
+
+<section id="start" class="card">
+<h2>Siap memulai misi?</h2>
+<p>Isi identitas terlebih dahulu. Jawab setiap soal untuk membuka soal berikutnya. Jika jawaban pertama belum tepat, kamu mendapat satu kesempatan lagi.</p>
+<div class="identity">
+<div><label for="student">Nama siswa</label><input id="student" placeholder="Tulis nama lengkapmu"></div>
+<div><label for="className">Kelas</label><input id="className" placeholder="Contoh: 3A"></div>
+</div>
+<div class="actions"><span class="small">✨ Semangat! Baca soal dengan teliti.</span><button class="primary" id="begin">Mulai Kuis 🚀</button></div>
+<div id="startError" class="feedback try hidden">Lengkapi nama dan kelas terlebih dahulu, ya!</div>
+</section>
+
+<section id="quiz" class="card hidden">
+<div class="topline"><span id="studentTag"></span><span id="qCount">Soal 1 dari 10</span></div>
+<div class="progress"><div id="progressBar" class="bar"></div></div>
+<div><span id="levelTag" class="level">LEVEL 1 • PEMAHAMAN DASAR</span></div>
+<h2 id="qHeading" class="qtitle"></h2>
+<div id="prompt" class="prompt"></div>
+<div id="answerArea" class="answer-area"></div>
+<div id="feedback" class="hidden" aria-live="polite"></div>
+<div class="actions">
+<button class="secondary" id="checkBtn">Periksa Jawaban</button>
+<button class="primary hidden" id="nextBtn">Soal Berikutnya ➜</button>
+</div>
+<p class="small" id="attemptNote">Kamu punya 2 kesempatan untuk menjawab soal ini.</p>
+</section>
+
+<section id="result" class="card final hidden">
+<div class="celebrate">🏆 🎉 🌟</div>
+<h2>Misi selesai!</h2>
+<p id="resultName"></p>
+<div class="score" id="score"></div>
+<p id="resultText"></p>
+<div id="summary"></div>
+<button class="primary" onclick="location.reload()">Main Lagi 🔄</button>
+</section>
+<footer>Belajar matematika itu menyenangkan • Terus berusaha dan jangan takut mencoba!</footer>
+</div>
+<script>
+const questions = [
+{level:1,title:"Soal 1 • Pita yang dipotong",prompt:"Sebuah pita dipotong pada 1 tempat. Berapa banyak bagian pita yang dihasilkan?",type:"choice",options:["1 bagian","2 bagian","3 bagian","4 bagian"],answer:"2",hint:"Bayangkan pita utuh yang terbelah di satu tempat.",explain:"Tepat! Satu potongan membagi pita menjadi 2 bagian."},
+{level:1,title:"Soal 2 • Kertas Ibu",prompt:"Ibu memotong selembar kertas pada 4 tempat yang berbeda. Berapa banyak bagian kertas yang diperoleh?",type:"number",answer:5,unit:"bagian",explain:"Hebat! Setiap pemotongan menambah satu bagian. Jadi hasilnya 5 bagian."},
+{level:1,title:"Soal 3 • Batang bambu",prompt:"Sebatang bambu dipotong menjadi beberapa bagian. Jika dilakukan 6 kali pemotongan, berapa banyak potongan bambu yang dihasilkan?",type:"select",options:["5 bagian","6 bagian","7 bagian","8 bagian"],answer:"7",explain:"Benar! Enam kali pemotongan menghasilkan 7 bagian."},
+{level:2,title:"Soal 4 • Potongan kayu",prompt:"Sebuah kayu dipotong hingga menghasilkan 9 bagian sama panjang. Berapa kali pemotongan yang dilakukan?",type:"number",answer:8,unit:"kali",explain:"Bagus! Untuk memperoleh 9 bagian, diperlukan 8 kali pemotongan."},
+{level:2,title:"Soal 5 • Pita Rina",prompt:"Rina ingin memperoleh 15 potongan pita dari satu pita panjang. Berapa kali ia harus memotong pita tersebut?",type:"choice",options:["13 kali","14 kali","15 kali","16 kali"],answer:"14",explain:"Tepat! Rina perlu melakukan 14 kali pemotongan."},
+{level:2,title:"Soal 6 • Tali panjang",prompt:"Sebuah tali dipotong sebanyak beberapa kali hingga menghasilkan 21 bagian. Tentukan banyak pemotongan yang dilakukan.",type:"number",answer:20,unit:"kali",explain:"Benar! Untuk menghasilkan 21 bagian diperlukan 20 pemotongan."},
+{level:3,title:"Soal 7 • Kayu Pak Budi",prompt:"Pak Budi memiliki sebatang kayu. Pada hari pertama, kayu tersebut dipotong sebanyak 3 kali. Pada hari kedua, kayu yang sama dipotong lagi sebanyak 5 kali. Jika seluruh pemotongan dilakukan secara berurutan pada potongan kayu yang tersedia, berapa banyak bagian kayu yang dihasilkan?",type:"number",answer:9,unit:"bagian",explain:"Hebat! Total pemotongan 3 + 5 = 8 kali. Kayu menjadi 9 bagian."},
+{level:3,title:"Soal 8 • Dua garis pada kertas",prompt:"Sebuah kertas dipotong mengikuti 2 garis lurus yang sejajar. Jika kedua garis memotong seluruh kertas, berapa banyak bagian kertas yang terbentuk?",type:"choice",options:["2 bagian","3 bagian","4 bagian","5 bagian"],answer:"3",explain:"Tepat! Dua garis sejajar yang melintasi kertas membentuk 3 bagian."},
+{level:3,title:"Soal 9 • Pita Siti",prompt:"Siti memiliki seutas pita. Ia ingin membaginya menjadi 12 bagian. Berapa kali Siti harus memotong pita tersebut?",type:"number",answer:11,unit:"kali",explain:"Benar! Untuk mendapatkan 12 bagian, Siti perlu 11 kali pemotongan."},
+{level:3,title:"Soal 10 • Bambu Ayah",prompt:"Ayah memiliki sebatang bambu. Ayah memotong bambu tersebut sebanyak 9 kali. Jika setiap pemotongan membagi satu bagian menjadi dua, berapa banyak potongan bambu yang diperoleh?",type:"number",answer:10,unit:"bagian",explain:"Luar biasa! Sembilan pemotongan menghasilkan 10 bagian."}
+];
+let index=0,attempt=0,score=0,completed=0,wrongFirst=0;
+const $=id=>document.getElementById(id);
+function start(){
+ if(!$("student").value.trim()||!$("className").value.trim()){$("startError").classList.remove("hidden");return}
+ $("startError").classList.add("hidden");$("start").classList.add("hidden");$("quiz").classList.remove("hidden");
+ $("studentTag").textContent="👤 "+$("student").value.trim()+" • Kelas "+$("className").value.trim();render();
+}
+$("begin").addEventListener("click",start);
+function render(){
+ const q=questions[index];attempt=0;
+ $("qCount").textContent=`Soal ${index+1} dari ${questions.length}`;
+ $("progressBar").style.width=(index/questions.length*100)+"%";
+ $("levelTag").textContent=q.level===1?"LEVEL 1 • PEMAHAMAN DASAR":q.level===2?"LEVEL 2 • MENENTUKAN BANYAK PEMOTONGAN":"LEVEL 3 • SOAL CERITA DAN PENALARAN";
+ $("qHeading").textContent=q.title;$("prompt").textContent=q.prompt;
+ $("feedback").className="hidden";$("feedback").textContent="";
+ $("checkBtn").classList.remove("hidden");$("checkBtn").disabled=false;
+ $("nextBtn").classList.add("hidden");$("attemptNote").textContent="Kamu punya 2 kesempatan untuk menjawab soal ini.";
+ const area=$("answerArea");area.innerHTML="";
+ if(q.type==="number"){
+  area.innerHTML=`<label for="answer">Tulis jawabanmu (${q.unit})</label><input id="answer" type="number" min="0" step="1" placeholder="Ketik angka di sini">`;
+ }else{
+  q.options.forEach((o,i)=>{const val=o.match(/^\d+/)[0];area.insertAdjacentHTML("beforeend",`<label class="option"><input type="radio" name="answer" value="${val}"><span>${String.fromCharCode(65+i)}. ${o}</span></label>`)});
+ }
+}
+function getAnswer(){const q=questions[index];if(q.type==="number")return $("answer").value.trim();const chosen=document.querySelector('input[name="answer"]:checked');return chosen?chosen.value:null}
+$("checkBtn").addEventListener("click",()=>{
+ const q=questions[index],v=getAnswer();
+ if(v===null||v===""){$("feedback").className="feedback try";$("feedback").textContent="Pilih atau isi jawabanmu dulu, ya. Kamu pasti bisa!";return}
+ const ok=Number(v)===Number(q.answer);
+ if(ok){
+  score+=attempt===0?10:5;completed++;
+  $("feedback").className="feedback good";$("feedback").innerHTML=(attempt===0?"🎉 Hebat! Jawabanmu benar! ":"🌟 Usaha bagus! Sekarang jawabanmu benar! ")+q.explain;
+  $("checkBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");
+  $("attemptNote").textContent="Soal selesai. Kamu boleh lanjut ke soal berikutnya.";
+ }else if(attempt===0){
+  attempt=1;wrongFirst++;
+  $("feedback").className="feedback try";$("feedback").textContent="Belum tepat, tetapi jangan menyerah! 💪 Baca kembali soalnya dan coba sekali lagi.";
+  $("attemptNote").textContent="Kesempatan kedua: periksa kembali jawabanmu.";
+ }else{
+  completed++;
+  $("feedback").className="feedback bad";$("feedback").innerHTML=`Terima kasih sudah mencoba! 🌱 Jawaban yang tepat adalah <b>${q.answer} ${q.unit||" "}</b>. ${q.explain}`;
+  $("checkBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");
+  $("attemptNote").textContent="Kesempatan mencoba sudah digunakan. Perhatikan pembahasannya, lalu lanjutkan.";
+ }
+});
+$("nextBtn").addEventListener("click",()=>{index++;if(index<questions.length)render();else finish()});
+function finish(){
+ $("quiz").classList.add("hidden");$("result").classList.remove("hidden");$("progressBar").style.width="100%";
+ $("resultName").textContent=`${$("student").value.trim()} • Kelas ${$("className").value.trim()}`;
+ $("score").textContent=`${score} / 100`;
+ $("resultText").textContent=score>=80?"Luar biasa! Kamu sudah menguasai banyak tantangan pemotongan! 🎉":score>=50?"Kerja bagus! Terus berlatih agar semakin percaya diri. 🌟":"Kamu sudah berusaha menyelesaikan semua soal. Terus berlatih, ya! 💪";
+ $("summary").innerHTML=`<p>Soal diselesaikan: <b>${completed} dari 10</b></p><p>Jawaban benar pada percobaan pertama: <b>${10-wrongFirst} soal</b></p><p class="small">Nilai: 10 poin untuk jawaban benar pada percobaan pertama, 5 poin jika benar pada percobaan kedua.</p>`;
+}
+</script>
+</body>
+</html>
